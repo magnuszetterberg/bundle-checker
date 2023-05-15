@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>Servers Status</h1>
-    <div v-if="servers">
-      <div v-for="server in servers" :key="server.name">
-        <h3>{{ server.name }}</h3>
-        <Status :status="server.status" />
+    <div v-if="statuses">
+      <div v-for="status in statuses" :key="status.name">
+        <h3>{{ status.name }}</h3>
+        <Status :status="status.status" />
       </div>
     </div>
     <div v-else>
@@ -14,18 +14,18 @@
 </template>
 
 <script>
-import { loadServers } from '~/plugins/api.js'
+import { getStatuses } from '~/plugins/api.js'
 import Status from '~/components/Status.vue'
 
 export default {
   data() {
     return {
-      servers: null,
+      statuses: null
     };
   },
   async created() {
     try {
-      this.servers = await loadServers()
+      this.statuses = await getStatuses()
     } catch (error) {
       console.error(error)
     }

@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 const instance = axios.create({
+  baseURL: "http://localhost:3000",
   timeout: 5000
 })
 
 export const get = async (url) => {
   try {
-    console.log('GET request:', url); // Add this line
     const response = await instance.get(url)
     return response.data
   } catch (error) {
@@ -16,7 +16,6 @@ export const get = async (url) => {
 
 export const loadServers = async () => {
   try {
-    console.log('Loading servers...'); // Add this line
     const response = await instance.get('/servers.json')
     return response.data
   } catch (error) {
@@ -31,19 +30,21 @@ export const getStatuses = async () => {
 
     for (const server of servers) {
       try {
-        console.log('Getting status for:', server.url); // Add this line
         const response = await get(server.url)
         const status = {
           name: server.name,
           status: response.status
+         
         }
         statuses.push(status)
       } catch (error) {
+        console.error(`Failed to get status for server "${server.name}": ${error.message}`)
         const status = {
           name: server.name,
           status: 500
         }
         statuses.push(status)
+
       }
     }
 
