@@ -1,0 +1,14 @@
+[
+  {
+    "name": "nodered",
+    "url": "http://localhost:1880"
+  },
+  {
+    "name": "pwa",
+    "url": "http://localhost:3001"
+  },
+  {
+    "name": "arena",
+    "url": "http://localhost:3000"
+  }
+]
