@@ -38,7 +38,7 @@ export const getStatuses = async () => {
         }
         statuses.push(status)
       } catch (error) {
-        console.error(`Failed to get status for server "${server.name}": ${error.message}`)
+        // console.error(`Failed to get status for server "${server.name}": ${error.message}`)
         const status = {
           name: server.name,
           status: 500
